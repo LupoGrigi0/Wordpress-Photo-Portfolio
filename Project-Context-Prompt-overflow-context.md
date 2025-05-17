@@ -90,7 +90,7 @@ Here are some VS Code plugins that will make your WordPress development more eff
 
 Let's outline the basic structure for your custom theme:
 
-`your-portfolio-theme/`  
+`Lupos-portfolio-theme/`  
 `├── assets/`  
 `│   ├── css/`  
 `│   ├── js/`  

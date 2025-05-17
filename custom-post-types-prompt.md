@@ -13,6 +13,30 @@ Project context:
 - Each "block" represents an art project/collection
 - Need to organize thousands of images into manageable portfolio items
 
+The project is structured into these files:
+
+`Lupos-portfolio-theme/`  
+`├── assets/`  
+`│   ├── css/`  
+`│   ├── js/`  
+`│   └── images/`  
+`├── inc/`  
+`│   ├── custom-post-types.php`  
+`│   ├── template-functions.php`  
+`│   ├── customizer.php`  
+`│   └── carousel-functions.php`  
+`├── template-parts/`  
+`│   ├── content-block.php`  
+`│   └── carousel.php`  
+`├── functions.php`  
+`├── header.php`  
+`├── footer.php`  
+`├── index.php`  
+`├── single.php`  
+`├── page.php`  
+`├── style.css`  
+`└── screenshot.png`
+
 Requirements for this file:
 1. Create a custom post type called "Portfolio" for art projects
 2. Create custom taxonomies for categorizing portfolio items (e.g., medium, subject, year)
