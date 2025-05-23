@@ -10,8 +10,9 @@ Building a custom WordPress theme for an art portfolio featuring:
 ## Project Organization
 
 ### Completed Files
-1. **parallax-scroll.js** - Core JavaScript for the parallax scrolling effect
-2. **portfolio-theme-style.css** - Main theme stylesheet (partial)
+1. **parallax-scroll.js** - Core JavaScript for the parallax scrolling effect 
+    (COMPLETEassets/js/parallax-scroll.js)
+2. **portfolio-theme-style.css** - Main theme stylesheet (COMPLETE assets/css/portfolio-theme-styles.css)
 
 ### Files To Be Completed
 
