@@ -1,3 +1,5 @@
+#NOTE: this file's context was prior to starting to use cladues "project" feature, this file was not added to Cladue's project
+
 # Project Management Conversation
 
 ## Lupo:
@@ -206,3 +208,6 @@ That sounds like a perfect plan\! Setting up the GitHub repo with our conversati
 Starting with custom-post-types.php is an excellent choice since it establishes the foundation for your portfolio structure.  
 I'll be here whenever you're ready to continue or need updates. Feel free to come back and let me know how it goes with that file, and we can decide on the next steps or make any adjustments to our approach.  
 Good luck with the implementation, and I look forward to your update\!  
+
+## Lupo: 
+Major update, git hub repo created, several files have been created, but most importantly we are switching to creating a project and using your project interface. So, all of the above conversation about creating specific prompts for each file, and creating each file in a seporate chat is no longer valid. Moving forward we are using the project interface, and all design descision, and project progress are being maintained in the project-plan.md file

@@ -1,0 +1,1 @@
+THIS Directory and all it's contents was intended to hold the specific prompts for each file in the project. This was prior to using Cladue's Project feature, and thuse this directory and all it's files are to be considered invalid. and will be removed in a future projet update. 

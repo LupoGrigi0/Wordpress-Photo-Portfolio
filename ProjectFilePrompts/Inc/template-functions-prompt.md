@@ -71,6 +71,26 @@ The directory structure is laid out like this
 `├── style.css`  
 `└── screenshot.png`
 
+### Other Notes from Genevieve:
+
+### **Custom Post Types Strategy**
+
+Since you want to organize your content based on your media directory structure, I recommend creating a custom post type for your portfolio items along with custom taxonomies for categorization.
+
+Let's set up a system where:
+
+1. Each "block" is a custom post type called "Portfolio Item"  
+2. You can categorize these into different sections/pages  
+3. You'll use custom fields to store the carousel images
+
+### **Dynamic Block Generation**
+
+For the dynamic block generation based on your directory structure, we'll need to:
+
+1. Create a custom import tool that scans your directories  
+2. Generate portfolio items based on folder structure  
+3. Associate images with their respective carousel blocks
+
 For This conversation:
 This segment focuses on: template-functions.php
 

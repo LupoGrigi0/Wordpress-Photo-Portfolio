@@ -38,3 +38,8 @@ So here I am trying to capture context...
 I have _heaveily_ modivied the prompt for template-functions... and waiting until my usage time is available again... I guess I'll go create some artwork for my girlfriend. After I get template-functions completed I need to go have a conversation witht the project manager chat about the fact that these files keep filling up the context window. 
 
 AAAAHHH... when I added functions_php.php billions of errors. mostly because of undefined... @package ArtPortfolioTheme
+
+Ok. I upgraded to Cladue Pro, and now starting this as a project, so I'm starting over...
+Updating the project plan and specs
+
+And git.hub repo has been updated to reflect use of project mode with claude
