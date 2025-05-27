@@ -41,205 +41,223 @@ Possibly with opacity/transition effects as they enter/exit the viewport
 3. Fortunately I do not need filterable galleries, or lightbox functionality, I am trying to optimize for a browsing and scrolling and auto play
 4. Yes, I will need to allow users to navagate between images in full screen mode
 
+# Lupo's WordPress Portfolio Theme Project Plan
+
 ## Project Overview
-Building a custom WordPress theme for an art portfolio featuring:
-- Parallax scrolling with floating content blocks
-- Background images that change based on scroll position
-- Custom image carousel for displaying artwork with varying aspect ratios
-- Dynamic block generation based on media directory structure
-## The project is organized like this
+Building a custom WordPress theme for Lupo's art portfolio featuring:
+- **Parallax scrolling** with floating content blocks over changing backgrounds
+- **Dynamic content generation** based on media directory structure  
+- **Custom image carousels** optimized for varying aspect ratios
+- **Progressive transparency** edges on content blocks for modern, fluid look
+- **Mobile-first responsive design** with no horizontal scrolling
 
-#### Core Theme Files
-1. **functions.php** - Theme setup, enqueuing scripts/styles, features
-2. **header.php** - Site header with navigation that fades in/out
-3. **footer.php** - Site footer
-4. **index.php** - Main template file
-5. **single.php** - Single post display template
-6. **page.php** - Static page display template
-7. **style.css** - Core style for portfolio
+## High Level Goals
 
-#### Include Files
-1. **custom-post-types.php** - Portfolio custom post type and taxonomy setup. 
-2. **template-functions.php** - Custom template functions
-3. **customizer.php** - Theme customization options
-4. **carousel-functions.php** - Custom carousel functionality
+### 1. Parallax Template Design
+- Content blocks "float" over background images with parallax effect
+- Background images change based on which content block is in viewport
+- Smooth crossfade transitions between background images
+- Navigation that fades in/out on scroll
+- Progressive transparency on block edges (hazy, undefined borders)
 
-#### Template Parts
-1. **content-block.php** - Template for portfolio content blocks
-2. **carousel.php** - Template for image carousel
+### 2. Dynamic Content Generation
+- Automatically create pages for each media directory
+- Generate content blocks for subdirectories  
+- Populate image carousels with files from each subdirectory
+- Support for optional titles, subtitles, and descriptions per directory
 
-#### JavaScript Files
-1. **custom-carousel.js** - Custom carousel implementation
-2. **dynamic-background.js** - Background image transition functionality
-3. **navigation.js** - Navigation fade in/out on scroll
-4. **parallax-scroll.js** - Core JavaScript for the parallax scrolling effect
+### 3. Custom Image Carousel
+- Handle varying aspect ratios smoothly
+- Multiple transition types and autoplay speed control
+- Optimized for mobile browsing and scrolling
+- Visual indicators for carousel progress/loading
+- Full-screen navigation capability
 
-#### Stylesheet Files
-1. **reset.css** - CSS reset/normalize
-2. **responsive.css** - Responsive design rules
-3. **carousel-styles.css** - Carousel-specific styles
-4. **portfolio-theme-style.css** - Main theme stylesheet 
+## Technical Architecture
 
-The directory structure is laid out like this
+### Core Theme Structure
+```
+Lupos-portfolio-theme/
+├── assets/
+│   ├── css/
+│   │   ├── reset.css
+│   │   ├── responsive.css  
+│   │   ├── carousel-styles.css      [CREATED - Draft 1]
+│   │   └── portfolio-theme-style.css [CREATED - Draft 1]
+│   ├── js/
+│   │   ├── custom-carousel.js
+│   │   ├── dynamic-background.js
+│   │   ├── navigation.js
+│   │   └── parallax-scroll.js       [CREATED - Draft 1]
+│   └── images/
+├── inc/
+│   ├── custom-post-types.php        [CREATED - Draft 1]
+│   ├── template-functions.php       [IN PROGRESS]
+│   ├── customizer.php
+│   └── carousel-functions.php
+├── template-parts/
+│   ├── content-block.php
+│   └── carousel.php
+├── functions.php                    [CREATED - Draft 1, NEEDS DEBUGGING]
+├── header.php
+├── footer.php  
+├── index.php
+├── single.php
+├── page.php
+├── style.css
+└── screenshot.png
+```
 
-`Lupos-portfolio-theme/`  
-`├── assets/`  
-`│   ├── css/` 
-`│   |    ├── reset.css.css`  
-`│   |    ├── responsive.css.css`  
-`│   |    ├── carousel-styles.css`       **Status: Created, draft 1 complete**
-`│   |    └── portfolio-theme-style.css` **Status: Created, draft 1 complete** 
-`│   ├── js/`  
-`│   |   ├── custom-carousel.js`  
-`│   |   ├── dynamic-background.js`  
-`│   |   ├── navigation.js`  
-`│   |   └── parallax-scroll.js`         **Status: Created, draft 1 complete**
-`│   └── images/`  
-`├── inc/`  
-`│   ├── custom-post-types.php`          **Status: Created, draft 1 complete**
-`│   ├── template-functions.php`  
-`│   ├── customizer.php`  
-`│   └── carousel-functions.php`  
-`├── template-parts/`  
-`│   ├── content-block.php`  
-`│   └── carousel.php`  
-`├── functions.php`                      **Status: Created, draft 2 complete**
-`├── header.php`  
-`├── footer.php`  
-`├── index.php`  
-`├── single.php`  
-`├── page.php`  
-`├── style.css`                         **Status: Created, draft 2 complete**
-`└── screenshot.png`
+## Content Organization Strategy
 
-### Other Notes from Genevieve:
+### Custom Post Types
+- **Portfolio Item** custom post type for content blocks
+- Custom taxonomies for categorization/pages
+- Custom fields for carousel images and metadata
+- Import tool to scan directories and generate posts
 
-### **Custom Post Types Strategy**
+### Directory Mapping
+- One directory = One page
+- Subdirectories = Content blocks within page  
+- Images in subdirectory = Carousel content
+- Optional JSON/text files for titles and descriptions
 
-Since you want to organize your content based on your media directory structure, I recommend creating a custom post type for your portfolio items along with custom taxonomies for categorization.
+## Design Specifications
 
-Let's set up a system where:
+### Content Blocks
+- **Header Block**: Page title, optional subtitle, optional description paragraphs
+- **Standard Blocks**: Title, subtitle (optional), 1-4 image carousels
+- **Progressive Transparency**: Edges fade to completely transparent
+- **Modern Fluid Design**: No hard borders or defined edges
+- **Responsive Layout**: Automatic scaling for mobile/tablet/desktop
 
-1. Each "block" is a custom post type called "Portfolio Item"  
-2. You can categorize these into different sections/pages  
-3. You'll use custom fields to store the carousel images
+### Background Behavior  
+- Fixed background that changes on scroll
+- Transitions to first image of focused content block's first carousel
+- Smooth crossfade transitions between images
+- Full-screen coverage
 
-### **Dynamic Block Generation**
+### Navigation
+- Fade in/out based on scroll position
+- Mobile-optimized
+- Clean, minimal design
 
-For the dynamic block generation based on your directory structure, we'll need to:
+## Technical Requirements
 
-1. Create a custom import tool that scans your directories  
-2. Generate portfolio items based on folder structure  
-3. Associate images with their respective carousel blocks
-
-Genevieve's update
- Lupo's WordPress Portfolio Theme Project Plan - Updated
-
-## Project Status Overview
-
-### ✅ Completed Files
-- **functions.php** - ✅ FIXED! Core theme setup with proper naming, file existence checks, debug mode
-- **custom-post-types.php** - ✅ Portfolio post type with custom meta boxes for background images, carousel data, directory scanning
-- **carousel-styles.css** - ✅ Advanced carousel with fullscreen mode, responsive controls, loading states
-- **portfolio-theme-styles.css** - ✅ Main theme with floating content blocks, parallax backgrounds, progressive transparency
-- **parallax-scroll.js** - ✅ Core parallax scrolling functionality
-
-### 🔧 In Progress
-- **style.css** - WordPress required main stylesheet (started creation)
-
-### 📋 Priority Queue (Deployment Ready)
-**Phase 1 - CURRENT FOCUS - Core Templates:**
-- **style.css** - WordPress main stylesheet ⚡ NEXT  
-- **header.php** - Site header with fade navigation ⚡ NEXT
-- **footer.php** - Site footer ⚡ NEXT
-- **index.php** - Main template file ⚡ NEXT
-
-**Phase 2 - JavaScript Functionality:**
-- **custom-carousel.js** - Frontend carousel implementation
-- **dynamic-background.js** - Background crossfade transitions  
-- **navigation.js** - Navigation fade effects
-
-**Phase 3 - Backend & Content Generation:**
-- **template-functions.php** - Directory scanning, block generation
-- **customizer.php** - Theme options
-- **carousel-functions.php** - Carousel backend
-- **Admin interface** - Directory import management page
-
-**Phase 4 - Template Parts & Polish:**
-- **single.php**, **page.php** - Individual content templates
-- **content-block.php**, **carousel.php** - Template parts
-- **reset.css**, **responsive.css** - Additional styles
-
-## Technical Decisions - FINALIZED
-
-### Background Image Strategy ✅
-- **First image from first carousel** in each content block becomes background
-- **Crossfade transition** based on content block scroll position relative to viewport center
-- **Gradual blending** - transition intensity based on "distance" from center view
-- **Directional logic** - block moving toward center triggers its background (up/down scroll)
-
-### Directory Organization Mapping ✅
-- **WordPress admin-side generation** (not dynamic real-time)
-- **Structure**: `/portfolio/sculptures/abstract/` → Page "Sculptures" with blocks for root images + "Abstract" block
-- **Limits**: Max 20 images per carousel, max 4-5 carousels per content block
-- **Batch processing**: AJAX-based with progress indicators and rollback capability
-
-### Carousel Aspect Ratio Handling ✅
-- **Dynamic container sizing** based on current image (no cropping, no letterboxing)
-- **Mixed ratios supported**: Square, 5:4, 9:16 (mostly 4096px on one side)
-- **Responsive behavior**: Maintain aspect ratios across devices
-
-### Navigation Behavior ✅
-- **Scroll-based fade**: Appears/disappears based on content block positions
-- **Smooth transitions**: 0.3s ease-in-out
-- **Mobile optimized**: Adapted touch interactions
-
-## New Admin Interface Design
-
-### Custom Admin Page: "Portfolio Directory Manager"
-**Location**: Under Portfolio menu in WordPress admin
-**Features**:
-- Directory path input with validation
-- Batch import with progress tracking
-- Preview mode before publishing
-- Incremental updates (scan only changed directories)
-- Rollback capability for failed imports
-- Settings for max images/carousels per block
-- Import history and logging
-
-### Admin Workflow
-1. **Scan Directory Structure** → Preview generated pages/blocks
-2. **Review & Adjust** → Modify titles, organization, image selection
-3. **Publish** → Create actual WordPress posts/pages
-4. **Monitor** → Track import progress, handle errors
-5. **Rollback** → Undo if needed, restore previous state
-
-## Architecture Notes
-
-**Custom Post Type Structure:**
-- `apt_portfolio` - Main portfolio items
-- Taxonomies: `apt_medium`, `apt_subject`, `apt_year`
-- Meta fields: `_apt_background_image`, `_apt_carousel_data`, `_apt_directory_path`
-
-**JavaScript Dependencies:**
-- jQuery (WordPress core)
-- Custom carousel implementation
-- Parallax scroll handlers
-- Background transition system
-
-**CSS Architecture:**
-- CSS custom properties for theming
-- Progressive transparency effects
+### Browser Support
 - Mobile-first responsive design
-- Backdrop filters for modern browsers
+- Touch-friendly carousel controls
+- Smooth scrolling performance on mobile devices
+- Progressive enhancement for desktop features
 
-## Project Context & Goals
-- WordPress theme for art portfolio with thousands of organized images
-- Parallax scrolling with floating content blocks over dynamic backgrounds
-- Custom image carousels handling varying aspect ratios smoothly
-- Automated content generation from directory structure
-- Mobile-optimized, no horizontal scrolling
-- Background crossfading based on content block scroll positions
-- **Target**: Deploy to WordPress dev environment for testing and refinement
-- **Future**: Open source template for other artists to use
-- **Collaboration**: Lupo (Yakima, WA) + girlfriend/graphic designer (Santiago, Chile)
+### Performance Optimization
+- Lazy loading for carousel images
+- Optimized image sizes for different viewports
+- Minimal JavaScript footprint
+- CSS transitions over JavaScript animations where possible
+
+## File Versioning Convention
+
+All artifacts follow this naming pattern:
+```
+filename-v[major].[minor]-[descriptor]
+```
+
+Examples:
+- `functions-v1.0-initial` (first version)
+- `functions-v1.1-bugfix` (minor update)  
+- `functions-v2.0-refactor` (major changes)
+- `project-plan-v1.2-session3` (updated in session 3)
+
+**Rule**: Only latest version stays in project knowledge. Archive old versions locally.
+
+## File Dependencies Map
+
+### Core PHP Files
+- **functions.php** → Depends on: inc/custom-post-types.php, inc/template-functions.php, inc/customizer.php, inc/carousel-functions.php
+- **header.php** → Depends on: functions.php, assets/js/navigation.js, assets/css/portfolio-theme-style.css
+- **footer.php** → Depends on: functions.php, assets/js/custom-carousel.js, assets/js/dynamic-background.js
+- **index.php** → Depends on: header.php, footer.php, template-parts/content-block.php, functions.php
+- **single.php** → Depends on: header.php, footer.php, functions.php
+- **page.php** → Depends on: header.php, footer.php, functions.php
+
+### Include Files
+- **inc/custom-post-types.php** → Depends on: WordPress core
+- **inc/template-functions.php** → Depends on: inc/custom-post-types.php, WordPress core
+- **inc/customizer.php** → Depends on: functions.php, WordPress core
+- **inc/carousel-functions.php** → Depends on: inc/custom-post-types.php
+
+### JavaScript Files
+- **assets/js/custom-carousel.js** → Depends on: jQuery (WordPress core), carousel-styles.css
+- **assets/js/dynamic-background.js** → Depends on: jQuery (WordPress core), parallax-scroll.js
+- **assets/js/navigation.js** → Depends on: jQuery (WordPress core)
+- **assets/js/parallax-scroll.js** → Depends on: jQuery (WordPress core), dynamic-background.js
+
+### CSS Files
+- **assets/css/portfolio-theme-style.css** → Depends on: reset.css
+- **assets/css/carousel-styles.css** → Depends on: portfolio-theme-style.css
+- **assets/css/responsive.css** → Depends on: portfolio-theme-style.css
+- **assets/css/reset.css** → No dependencies (base layer)
+
+### Template Parts
+- **template-parts/content-block.php** → Depends on: template-parts/carousel.php, inc/template-functions.php
+- **template-parts/carousel.php** → Depends on: inc/carousel-functions.php, assets/js/custom-carousel.js
+
+## Development Status
+
+### ✅ DEPLOYMENT READY (No further changes needed)
+- **functions.php** - Core theme setup, fixed and tested
+- **style.css** - WordPress-required main stylesheet
+- **custom-post-types.php** - Portfolio post type with admin interface
+- **carousel-styles.css** - Advanced carousel with fullscreen mode
+- **portfolio-theme-styles.css** - Main theme with floating blocks and parallax
+- **parallax-scroll.js** - Core parallax functionality
+
+### 🎯 PHASE 1 - IMMEDIATE PRIORITY (Visual Functionality)
+- [ ] **header.php** - Site header with fade navigation ⚡ NEXT
+- [ ] **footer.php** - Site footer structure  
+- [ ] **index.php** - Main template file with parallax container
+
+### 📋 PHASE 2 - JavaScript Functionality
+- [ ] **custom-carousel.js** - Frontend carousel implementation
+- [ ] **dynamic-background.js** - Background crossfade transitions  
+- [ ] **navigation.js** - Navigation fade effects
+
+### 📊 PHASE 3 - Backend & Content Generation
+- [ ] **template-functions.php** - Directory scanning, block generation
+- [ ] **customizer.php** - Theme options
+- [ ] **carousel-functions.php** - Carousel backend
+- [ ] **Admin interface** - Directory import management page
+
+### 🎨 PHASE 4 - Template Parts & Polish
+- [ ] **single.php**, **page.php** - Individual content templates
+- [ ] **content-block.php**, **carousel.php** - Template parts
+- [ ] **reset.css**, **responsive.css** - Additional styles
+
+## Key Technical Decisions
+
+### WordPress Integration
+- Using Elementor and Gutenberg compatibility
+- Custom post types for portfolio items
+- Advanced Custom Fields for metadata (to be implemented)
+- Custom import tool for directory scanning
+
+### Performance Strategy
+- CSS-based animations where possible
+- Intersection Observer API for scroll detection
+- RequestAnimationFrame for smooth transitions
+- Image optimization and lazy loading
+
+## Next Steps
+1. Complete `template-functions.php` with directory scanning and dynamic generation
+2. Debug and refine `functions.php` 
+3. Create custom carousel JavaScript
+4. Implement background transition system
+5. Build template files and template parts
+6. Testing and refinement
+
+## Notes
+- Context window limitations require creating files in separate chats
+- Using Claude Project mode for better file management
+- All code files should be created as artifacts for easy copying/downloading
+- Upgraded to Claude Pro for expanded usage limits
