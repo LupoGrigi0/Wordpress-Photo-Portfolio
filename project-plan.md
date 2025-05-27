@@ -103,13 +103,13 @@ The directory structure is laid out like this
 `├── template-parts/`  
 `│   ├── content-block.php`  
 `│   └── carousel.php`  
-`├── functions.php`                      **Status: Created, draft 1 complete MANY ERRORS due to undefined functions and @package ArtPortfolioTheme**
+`├── functions.php`                      **Status: Created, draft 2 complete**
 `├── header.php`  
 `├── footer.php`  
 `├── index.php`  
 `├── single.php`  
 `├── page.php`  
-`├── style.css`  
+`├── style.css`                         **Status: Created, draft 2 complete**
 `└── screenshot.png`
 
 ### Other Notes from Genevieve:
