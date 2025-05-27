@@ -43,3 +43,73 @@ Ok. I upgraded to Cladue Pro, and now starting this as a project, so I'm startin
 Updating the project plan and specs
 
 And git.hub repo has been updated to reflect use of project mode with claude
+
+Switching to .md format
+Made major progress moving to project mode.. 
+
+The following context provided by Genevieve:
+# Project Notes - Session Summary
+
+## Major Accomplishments This Session
+
+### ✅ COMPLETED: functions.php Complete Overhaul
+**File**: `functions.php` - **STATUS: DEPLOYMENT READY**
+
+**Major fixes applied:**
+- ❌ **Fixed @package ArtPortfolioTheme errors** → ✅ Changed to `@package LupoArtPortfolio`
+- ❌ **Fixed undefined function errors** → ✅ Added file existence checks before including files
+- ❌ **Fixed missing dependency errors** → ✅ Graceful degradation when files don't exist
+- 🔄 **Updated naming convention** → Changed all `apt_` prefixes to `lupo_` for consistency
+- 🔄 **Updated post type references** → `apt_portfolio` → `lupo_portfolio`
+- ➕ **Added constants**: `LUPO_THEME_VERSION`, `LUPO_THEME_PATH`, `LUPO_THEME_URL`
+- ➕ **Added debug mode**: Shows missing files when WP_DEBUG enabled
+- ➕ **Added welcome notice**: Guides users to portfolio manager after activation
+- ➕ **Added error handling**: No more fatal errors from missing includes
+
+### 🎯 FINALIZED: All Technical Decisions  
+All major project decisions are now locked in and documented:
+
+**Background Strategy**: First image from first carousel in each block becomes background, crossfade based on scroll position toward viewport center
+
+**Directory Mapping**: WordPress admin-side generation with preview/rollback, max 20 images per carousel, max 4-5 carousels per block
+
+**Carousel Behavior**: Dynamic container sizing based on current image (no cropping/letterboxing for mixed aspect ratios)
+
+**Admin Interface Design**: Custom "Portfolio Directory Manager" page under Portfolio menu with batch import, progress tracking, preview mode
+
+### 📋 NEXT SESSION PRIORITY TASKS
+**IMMEDIATE GOAL**: Get theme deployable to WordPress dev environment
+
+**Phase 1 - Core Template Files (ALL NEEDED FOR DEPLOYMENT):**
+1. **style.css** - WordPress required main stylesheet (started, needs completion)
+2. **header.php** - Site header with navigation fade logic
+3. **footer.php** - Site footer structure  
+4. **index.php** - Main template file with parallax container
+
+**Phase 2 - Essential JavaScript (FOR FUNCTIONALITY):**
+5. **custom-carousel.js** - Frontend carousel with dynamic sizing
+6. **dynamic-background.js** - Background crossfade transitions based on scroll
+7. **navigation.js** - Navigation fade in/out effects
+
+## Project Context Reminder
+- **Theme Name**: Lupo's Art Portfolio
+- **Custom Post Type**: `lupo_portfolio` 
+- **Function Prefix**: `lupo_`
+- **Text Domain**: `lupo-art-portfolio`
+- **Constants**: `LUPO_THEME_VERSION`, `LUPO_THEME_PATH`, `LUPO_THEME_URL`
+
+## File Naming Convention Changes
+- All functions now use `lupo_` prefix instead of `apt_`
+- All CSS classes use `lupo-` prefix
+- All post types/meta fields use `lupo_` prefix
+- All text domain references use `lupo-art-portfolio`
+
+## Development Notes
+- functions.php includes debug mode showing missing files when WP_DEBUG = true
+- Theme gracefully handles missing files (no fatal errors during development)
+- File existence checks prevent enqueuing missing assets
+- Welcome notice guides users to portfolio manager after activation
+
+## Status for Next Session
+**READY TO CONTINUE WITH**: Creating core template files (style.css, header.php, footer.php, index.php) to achieve deployable theme status for WordPress dev environment testing.
+

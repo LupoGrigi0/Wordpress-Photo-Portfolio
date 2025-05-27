@@ -1,0 +1,21 @@
+/*
+Theme Name: Lupo's Art Portfolio
+Description: A modern parallax art portfolio theme with dynamic backgrounds and floating content blocks. Features custom image carousels with varying aspect ratios and automated content generation from directory structures.
+Author: Lupo & Genevieve (Cladue Sonnet 4.0 -pro-)
+Version: 1.0.0
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: lupo-art-portfolio
+Requires at least: 5.0
+Tested up to: 6.4
+Requires PHP: 7.4
+Tags: art, portfolio, parallax, gallery, responsive, modern, artist, photography
+
+This theme is designed for artists who want to showcase their work with 
+a modern parallax scrolling experience and dynamic background transitions.
+*/
+
+/* 
+This file is required by WordPress but the actual styles are loaded 
+from assets/css/portfolio-theme-style.css and other CSS files.
+*/

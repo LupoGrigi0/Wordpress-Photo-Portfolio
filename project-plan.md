@@ -131,3 +131,115 @@ For the dynamic block generation based on your directory structure, we'll need t
 1. Create a custom import tool that scans your directories  
 2. Generate portfolio items based on folder structure  
 3. Associate images with their respective carousel blocks
+
+Genevieve's update
+ Lupo's WordPress Portfolio Theme Project Plan - Updated
+
+## Project Status Overview
+
+### ✅ Completed Files
+- **functions.php** - ✅ FIXED! Core theme setup with proper naming, file existence checks, debug mode
+- **custom-post-types.php** - ✅ Portfolio post type with custom meta boxes for background images, carousel data, directory scanning
+- **carousel-styles.css** - ✅ Advanced carousel with fullscreen mode, responsive controls, loading states
+- **portfolio-theme-styles.css** - ✅ Main theme with floating content blocks, parallax backgrounds, progressive transparency
+- **parallax-scroll.js** - ✅ Core parallax scrolling functionality
+
+### 🔧 In Progress
+- **style.css** - WordPress required main stylesheet (started creation)
+
+### 📋 Priority Queue (Deployment Ready)
+**Phase 1 - CURRENT FOCUS - Core Templates:**
+- **style.css** - WordPress main stylesheet ⚡ NEXT  
+- **header.php** - Site header with fade navigation ⚡ NEXT
+- **footer.php** - Site footer ⚡ NEXT
+- **index.php** - Main template file ⚡ NEXT
+
+**Phase 2 - JavaScript Functionality:**
+- **custom-carousel.js** - Frontend carousel implementation
+- **dynamic-background.js** - Background crossfade transitions  
+- **navigation.js** - Navigation fade effects
+
+**Phase 3 - Backend & Content Generation:**
+- **template-functions.php** - Directory scanning, block generation
+- **customizer.php** - Theme options
+- **carousel-functions.php** - Carousel backend
+- **Admin interface** - Directory import management page
+
+**Phase 4 - Template Parts & Polish:**
+- **single.php**, **page.php** - Individual content templates
+- **content-block.php**, **carousel.php** - Template parts
+- **reset.css**, **responsive.css** - Additional styles
+
+## Technical Decisions - FINALIZED
+
+### Background Image Strategy ✅
+- **First image from first carousel** in each content block becomes background
+- **Crossfade transition** based on content block scroll position relative to viewport center
+- **Gradual blending** - transition intensity based on "distance" from center view
+- **Directional logic** - block moving toward center triggers its background (up/down scroll)
+
+### Directory Organization Mapping ✅
+- **WordPress admin-side generation** (not dynamic real-time)
+- **Structure**: `/portfolio/sculptures/abstract/` → Page "Sculptures" with blocks for root images + "Abstract" block
+- **Limits**: Max 20 images per carousel, max 4-5 carousels per content block
+- **Batch processing**: AJAX-based with progress indicators and rollback capability
+
+### Carousel Aspect Ratio Handling ✅
+- **Dynamic container sizing** based on current image (no cropping, no letterboxing)
+- **Mixed ratios supported**: Square, 5:4, 9:16 (mostly 4096px on one side)
+- **Responsive behavior**: Maintain aspect ratios across devices
+
+### Navigation Behavior ✅
+- **Scroll-based fade**: Appears/disappears based on content block positions
+- **Smooth transitions**: 0.3s ease-in-out
+- **Mobile optimized**: Adapted touch interactions
+
+## New Admin Interface Design
+
+### Custom Admin Page: "Portfolio Directory Manager"
+**Location**: Under Portfolio menu in WordPress admin
+**Features**:
+- Directory path input with validation
+- Batch import with progress tracking
+- Preview mode before publishing
+- Incremental updates (scan only changed directories)
+- Rollback capability for failed imports
+- Settings for max images/carousels per block
+- Import history and logging
+
+### Admin Workflow
+1. **Scan Directory Structure** → Preview generated pages/blocks
+2. **Review & Adjust** → Modify titles, organization, image selection
+3. **Publish** → Create actual WordPress posts/pages
+4. **Monitor** → Track import progress, handle errors
+5. **Rollback** → Undo if needed, restore previous state
+
+## Architecture Notes
+
+**Custom Post Type Structure:**
+- `apt_portfolio` - Main portfolio items
+- Taxonomies: `apt_medium`, `apt_subject`, `apt_year`
+- Meta fields: `_apt_background_image`, `_apt_carousel_data`, `_apt_directory_path`
+
+**JavaScript Dependencies:**
+- jQuery (WordPress core)
+- Custom carousel implementation
+- Parallax scroll handlers
+- Background transition system
+
+**CSS Architecture:**
+- CSS custom properties for theming
+- Progressive transparency effects
+- Mobile-first responsive design
+- Backdrop filters for modern browsers
+
+## Project Context & Goals
+- WordPress theme for art portfolio with thousands of organized images
+- Parallax scrolling with floating content blocks over dynamic backgrounds
+- Custom image carousels handling varying aspect ratios smoothly
+- Automated content generation from directory structure
+- Mobile-optimized, no horizontal scrolling
+- Background crossfading based on content block scroll positions
+- **Target**: Deploy to WordPress dev environment for testing and refinement
+- **Future**: Open source template for other artists to use
+- **Collaboration**: Lupo (Yakima, WA) + girlfriend/graphic designer (Santiago, Chile)
