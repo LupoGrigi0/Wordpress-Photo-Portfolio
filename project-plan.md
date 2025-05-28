@@ -74,6 +74,7 @@ Building a custom WordPress theme for Lupo's art portfolio featuring:
 - Full-screen navigation capability
 
 ## Technical Architecture
+*** NOTE: We are using Wordpress Version 6.8.1 ***
 
 ### Core Theme Structure
 ```
@@ -107,6 +108,26 @@ Lupos-portfolio-theme/
 ├── style.css                        [CREATED - Draft 1]
 └── screenshot.png
 ```
+Excample of the directory structure for the actual portfolio files and directories
+```
+wp-content/uploads/
+├── portfolio/                    ← YOUR ROOT PORTFOLIO DIRECTORY
+│   ├── sculptures/              ← Creates "Sculptures" page
+│   │   ├── abstract/            ← Content block: "Abstract"
+│   │   │   ├── piece001.jpg
+│   │   │   ├── piece002.jpg
+│   │   │   └── ...
+│   │   └── realistic/           ← Content block: "Realistic"  
+│   │       ├── bust001.jpg
+│   │       └── ...
+│   ├── paintings/               ← Creates "Paintings" page
+│   │   ├── landscapes/          ← Content block: "Landscapes"
+│   │   └── portraits/           ← Content block: "Portraits"
+│   └── mixed-media/             ← Creates "Mixed Media" page
+│       ├── installation001.jpg
+│       └── ...
+```
+
 
 ## Content Organization Strategy
 
@@ -379,3 +400,4 @@ WordPress Admin → Portfolio Post Type → Meta Boxes → Carousel Data
 ---
 
 **Status Summary**: Core theme functionality complete and deployable. Ready for enhancement phases or real-world testing. 🚀
+

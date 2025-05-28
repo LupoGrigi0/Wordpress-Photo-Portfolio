@@ -388,6 +388,58 @@ Proper ARIA labels, keyboard navigation, screen reader support throughout.
 
 ---
 
-**Session Outcome**: From scattered files to complete deployable WordPress theme in one session! 🚀
+**Session Outcome**: From scattered files to complete deployable WordPress theme in one session! 
 
+#Deployment session notes:
+## Lupo:
+Find the root directory of the laragon (or docker)wordpress installation
+Find the wp-config.php file...
+(in the main laragon interface, on the bottom hit the "root" folder, and decend down to the directoryname that matches the laragon project name)
+wp-config.php will be in the root of the directlry. 
+For example:  D:\laragon\www\LupoPortfolioTest
+drop it into dev studio and scroll down(search)until you see this line.
+/* Add any custom values between this line and the "stop editing" line. */
 
+## Genevieve: 
+Debug Mode Pro Tips
+Since you're developing, add this to your wp-config.php:
+phpdefine('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
+define('WP_DEBUG_DISPLAY', true);
+
+## Lupo:
+save that out then decend down into wp-content/themes,
+(in dev studio right click on the Lupo-Portfolio_theme and click "reveal in explorer" this will open the source directory )
+Drag and drop (COPY) the Lupos-Portfolio_theme directory 
+in a web browser, open the Wordpress admin dashboard:
+http://lupoportfoliotest.local/wp-admin/
+In another web browser window have the target website open
+
+NOTE: I need to let genevieve know we are using wordpress version 6.8.1... (added to project plan)
+NOTE: A sample portfolio directory has been added to the DevStudio project(likely will be checked into github) a top level directory of wp-content was created wp-content\uploads\portfoloio, and several directories and subdirectories and images. For every new project or test, copy this directory to the same place in the wordpress hirearchy. 
+
+Aaaah... the deployment session, genevieve actually tells me how the project works in wordpress... cool
+## Genevieve:
+Phase 1 (Current): Manual Directory Path Entry
+
+You manually create portfolio items in WordPress admin
+Enter directory paths in the "Directory Path" field
+Click "Scan Directory" to auto-populate carousels
+Background uses first image from first carousel
+
+Quick Setup for Testing
+
+Create the structure: wp-content/uploads/portfolio/test-gallery/
+Add some images to that directory
+In WordPress admin: Add new portfolio item
+Directory Path field: Enter portfolio/test-gallery/
+Click "Scan Directory" - should populate carousel data
+Publish and view!
+### Lupo
+I used some actual directories from my portfolio
+#### HAHHAHAHAHAHAHA
+I explain the issues to the deployment session, i ask the deployment session if I should create a new session for debug or go back to the development session.
+ the deployment session tells me to go back to the implementation session
+I give the information to the development session, and the development session tells me to start a new debug session.
+HAHAHAHAHA Everybody wants to write code, nobody wants to debug it hahahaha... 
+I was thinking that the project management session is going to enjoy this... I think I'll take a moment and have a brief conversation with the project management session once I update the project notes and project plan. 
