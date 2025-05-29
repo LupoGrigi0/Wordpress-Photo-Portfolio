@@ -6,7 +6,9 @@
  * and loads the JavaScript modules for carousel and background effects
  *
  * @package LupoArtPortfolio
- * @version 1.0.0
+ * @version 1.5.0
+ * @author Lupo & Genevieve (Cladue Sonnet 4.0 -pro-)
+
  */
 
 // Exit if accessed directly
@@ -151,10 +153,12 @@ if ( ! defined( 'ABSPATH' ) ) {
             }
         }
         
-        // Check for portfolio posts
+        // Check for portfolio posts - FIXED: Using proper post count method
         $portfolio_count = wp_count_posts( 'lupo_portfolio' );
-        if ( $portfolio_count->publish == 0 ) {
+        if ( $portfolio_count && isset( $portfolio_count->publish ) && $portfolio_count->publish == 0 ) {
             $debug_info[] = "No portfolio posts found";
+        } elseif ( ! $portfolio_count ) {
+            $debug_info[] = "Portfolio post type not registered properly";
         }
         
         // Display debug info
@@ -176,7 +180,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $portfolio_data = array();
 
 if ( is_home() || is_front_page() ) {
-    // Get all portfolio posts for the main page
+    // Get all portfolio posts for the main page - FIXED: Using lupo_portfolio consistently
     $portfolio_query = new WP_Query( array(
         'post_type' => 'lupo_portfolio',
         'posts_per_page' => -1,
