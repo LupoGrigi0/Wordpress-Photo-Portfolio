@@ -83,29 +83,29 @@ Lupos-portfolio-theme/
 │   ├── css/
 │   │   ├── reset.css
 │   │   ├── responsive.css  
-│   │   ├── carousel-styles.css      [CREATED - Draft 1]
-│   │   └── portfolio-theme-style.css [CREATED - Draft 1]
+│   │   ├── carousel-styles.css       [Deployed, tested]
+│   │   └── portfolio-theme-style.css [Deployed, tested]
 │   ├── js/
-│   │   ├── custom-carousel.js
+│   │   ├── custom-carousel.js        [CREATED - Draft 1]
 │   │   ├── dynamic-background.js
 │   │   ├── navigation.js
-│   │   └── parallax-scroll.js       [CREATED - Draft 1]
+│   │   └── parallax-scroll.js       [Deployed, tested]
 │   └── images/
 ├── inc/
-│   ├── custom-post-types.php        [CREATED - Draft 1]
+│   ├── custom-post-types.php        [Deployed, tested - v 1.5]
 │   ├── template-functions.php       [IN PROGRESS]
 │   ├── customizer.php
 │   └── carousel-functions.php
 ├── template-parts/
 │   ├── content-block.php
 │   └── carousel.php
-├── functions.php                    [CREATED - Draft 1, NEEDS DEBUGGING]
-├── header.php                       [CREATED - Draft 1]
-├── footer.php                       [CREATED - Draft 1]
-├── index.php                        [CREATED - Draft 1]
+├── functions.php                    [Deployed, tested]
+├── header.php                       [Deployed, tested]
+├── footer.php                       [Deployed, tested - v 1.5]
+├── index.php                        [Deployed, tested]
 ├── single.php
 ├── page.php
-├── style.css                        [CREATED - Draft 1]
+├── style.css                        [Deployed, tested]
 └── screenshot.png
 ```
 Excample of the directory structure for the actual portfolio files and directories
