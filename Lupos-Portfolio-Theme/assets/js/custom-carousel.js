@@ -6,6 +6,48 @@
  *
  * @package LupoArtPortfolio
  * @version 1.0.0
+ * @author Lupo & Genevieve (Cladue Sonnet 4.0 -pro-)
+ * Key Features Built:
+🎯 Dynamic Container Sizing
+
+Auto-adjusts height based on current image aspect ratio
+Smooth transitions between different sized images
+Preserves artistic integrity - no cropping or letterboxing!
+
+📱 Touch & Mobile Optimized
+
+Swipe gestures for mobile navigation
+Mouse drag support for desktop
+Prevents accidental scrolling during horizontal swipes
+Responsive fullscreen mode
+
+⚡ Smart Performance
+
+Lazy dimension calculations - only when needed
+Debounced resize handling - smooth on window resize
+Configurable transitions - uses settings from WordPress admin
+Memory efficient - proper cleanup and event management
+
+♿ Accessibility Enhanced
+
+Keyboard navigation support
+Focus management for autoplay pause/resume
+Screen reader friendly indicators
+Escape key exits fullscreen
+
+🔧 WordPress Integration
+
+Reads theme settings from footer JSON injection
+Debug mode shows detailed console logs
+Graceful degradation - works even if settings missing
+Multiple carousel support - handles multiple carousels per page
+
+🔗 Integration Points:
+
+Uses the existing carousel markup from index.php
+Reads settings from lupo-theme-settings JSON in footer
+Works with the carousel CSS you already have
+Integrates with WordPress debug mode
  */
 
 document.addEventListener('DOMContentLoaded', function() {

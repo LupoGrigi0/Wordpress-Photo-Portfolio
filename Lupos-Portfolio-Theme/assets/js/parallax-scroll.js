@@ -5,6 +5,9 @@
  * 1. Parallax effect for content blocks
  * 2. Background image transitions based on scroll position
  * 3. Navigation fade in/out
+ * @package LupoArtPortfolio
+ * @version 1.0.0
+ * @author Lupo & Genevieve (Cladue Sonnet 4.0 -pro-)
  */
 
 document.addEventListener('DOMContentLoaded', function() {
