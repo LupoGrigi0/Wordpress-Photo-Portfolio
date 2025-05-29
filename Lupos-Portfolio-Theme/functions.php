@@ -58,7 +58,7 @@ add_action( 'after_setup_theme', 'lupo_theme_setup' );
 function lupo_enqueue_assets() {
     // CSS Files - check if they exist before enqueuing
     wp_enqueue_style( 'lupo-reset', LUPO_THEME_URL . '/assets/css/reset.css', array(), LUPO_THEME_VERSION );
-    wp_enqueue_style( 'lupo-main', LUPO_THEME_URL . '/assets/css/portfolio-theme-style.css', array( 'lupo-reset' ), LUPO_THEME_VERSION );
+    wp_enqueue_style( 'lupo-main', LUPO_THEME_URL . '/assets/css/portfolio-theme-styles.css', array( 'lupo-reset' ), LUPO_THEME_VERSION );
     
     if ( file_exists( LUPO_THEME_PATH . '/assets/css/carousel-styles.css' ) ) {
         wp_enqueue_style( 'lupo-carousel', LUPO_THEME_URL . '/assets/css/carousel-styles.css', array( 'lupo-main' ), LUPO_THEME_VERSION );
