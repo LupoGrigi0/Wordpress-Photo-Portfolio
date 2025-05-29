@@ -438,7 +438,27 @@ function lupo_directory_path_callback( $post ) {
         <script>
             jQuery(document).ready(function($) {
                 $('#lupo_scan_directory').click(function() {
-                    var path = $('#lupo_directory_path').val();
+                    /***@description
+                       WordPress Block Editor (Gutenberg) is actually built into WordPress core since version 5.0 - it's not a plugin anymore. Even "classic" meta boxes get rendered within the block editor context, which can create:
+
+                        DOM manipulation conflicts between WordPress JS and our code
+                        Multiple element creation during editor initialization
+                        Timing issues with jQuery selectors
+
+                        The Pattern We Found 🎯
+                        ❌ Fragile: $('#element_id').val() - can find wrong/duplicate elements
+                        ✅ Robust: $('input[name="element_name"]').first().val() - finds specific input by name attribute
+                        Critical Project Insight 💡
+                        For WordPress Theme Development:
+
+                        Always use name-based selectors for form inputs in admin areas
+                        WordPress creates complex DOM structures that can duplicate IDs
+                        Meta box JavaScript needs defensive coding against WordPress interference
+                     * 
+                     * 
+                     */
+             
+                    var path = $('input[name="lupo_directory_path"]').first().val(); 
                     if (!path) {
                         $('#lupo_scan_status').html('<span style="color:red;"><?php _e( 'Please enter a directory path first', 'lupo-art-portfolio' ); ?></span>');
                         return;
@@ -785,8 +805,8 @@ function lupo_scan_directory_ajax() {
     // Get list of image files
     $files = array();
     $carousel_data = array();
-    $valid_extensions = array( 'jpg', 'jpeg', 'png', 'gif', 'webp' );
-    
+    $valid_extensions = array( 'jpg', 'jpeg', 'png', 'gif', 'webp', 'jfif' );
+ 
     if ( $handle = opendir( $complete_path ) ) {
         $index = 0;
         

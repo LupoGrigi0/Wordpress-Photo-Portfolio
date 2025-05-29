@@ -155,7 +155,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         
         // Check for portfolio posts - FIXED: Using proper post count method
         $portfolio_count = wp_count_posts( 'lupo_portfolio' );
-        if ( $portfolio_count && isset( $portfolio_count->publish ) && $portfolio_count->publish == 0 ) {
+        if ( $portfolio_count && property_exists( $portfolio_count, 'publish' ) && $portfolio_count->publish == 0 ) {
             $debug_info[] = "No portfolio posts found";
         } elseif ( ! $portfolio_count ) {
             $debug_info[] = "Portfolio post type not registered properly";
