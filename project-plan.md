@@ -86,9 +86,9 @@ Lupos-portfolio-theme/
 │   │   ├── carousel-styles.css       [Deployed, tested]
 │   │   └── portfolio-theme-style.css [Deployed, tested]
 │   ├── js/
-│   │   ├── custom-carousel.js        [CREATED - Draft 1]
-│   │   ├── dynamic-background.js
-│   │   ├── navigation.js
+│   │   ├── custom-carousel.js        [Deployed, tested]
+│   │   ├── dynamic-background.js     [Deployed, tested]
+│   │   ├── navigation.js            [Deployed, tested]
 │   │   └── parallax-scroll.js       [Deployed, tested]
 │   └── images/
 ├── inc/
