@@ -593,3 +593,56 @@ if ( $portfolio_count && isset( $portfolio_count->publish ) && $portfolio_count-
 - Create reset.css to normalize browser styles
 - Review other potential missing asset files
 - Consider implementing CSS file load error handling
+
+## Workflow Improvements - 2025-06-15
+- Direct VS Code integration enables real-time file editing and project management
+- Immediate verification of fixes (like reset.css implementation)
+- Reduced context switching between tools
+- Better maintenance of project documentation and technical decisions
+- Faster iteration cycles for bug fixes and feature implementation
+
+## Development Best Practices
+- Keep CSS files modular and properly referenced
+- Maintain clear separation between reset, theme, and component-specific styles
+- Document all major changes in both project-plan.md and Project Notes.md
+
+## Technical Solution - Content Block Transparency (2025-06-15)
+- Issue: Fade effect being incorrectly applied to entire content block including carousels
+- Solution: 
+  1. Separated block structure into distinct layers:
+     - Content layer (z-index: 1) - Maintains solid visibility
+     - Background layer (z-index: 0) - Handles transparency effects
+  2. Added specific z-index management to ensure proper stacking
+  3. Isolated fade transitions to background layer only
+  4. Maintained carousel content visibility with z-index: 2
+
+## Implementation Changes
+- Updated portfolio-theme-styles.css with new layered approach
+- Added .block-background class for separate background handling
+- Modified transition effects to target specific layers
+- Enhanced z-index hierarchy for proper content stacking
+
+## Content Block Spacing Fix (2025-06-15)
+### Issue
+- Content blocks were overlapping
+- No clear visual separation between portfolio items
+- Inconsistent block heights
+
+### Solution
+1. Implemented full viewport height spacing between blocks
+2. Added minimum height requirements
+3. Used flexbox for better content organization
+4. Improved margin control for first/last blocks
+5. Implemented clear spacing rules to prevent overlap
+
+### Technical Implementation
+- Added new CSS custom properties for spacing
+- Used viewport-based units for consistent spacing
+- Implemented flexbox for better content organization
+- Added specific rules for carousel containers
+- Ensured proper z-index stacking
+
+### Next Steps
+- Test scroll behavior with new spacing
+- Verify carousel functionality within new layout
+- Check responsive behavior on different screen sizes

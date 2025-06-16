@@ -11,6 +11,8 @@
     --block-padding: 2rem;
     --block-border-radius: 0.5rem;
     --transition-speed: 0.5s;
+    --block-vertical-spacing: 100vh; /* Full viewport height between blocks */
+    --block-min-height: 60vh;       /* Minimum height for content blocks */
 }
 
 * {
@@ -116,52 +118,40 @@ body {
 /* Content blocks */
 .content-block {
     max-width: 1200px;
-    margin: 4rem auto;
-    padding: 0 2rem;
+    width: 90%;
+    margin: var(--block-vertical-spacing) auto; /* Full viewport height spacing */
+    min-height: var(--block-min-height);
+    padding: var(--block-padding);
     position: relative;
     transition: transform 0.5s ease-out;
     will-change: transform;
+    /* Ensure blocks don't collapse */
+    clear: both;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Prevent first block from having top margin */
+.content-block:first-child {
+    margin-top: calc(var(--block-vertical-spacing) * 0.5);
+}
+
+/* Add extra space after the last block for better scrolling */
+.content-block:last-child {
+    margin-bottom: calc(var(--block-vertical-spacing) * 0.5);
 }
 
 .block-content {
-    background: var(--content-bg-color);
+    position: relative;
+    z-index: 1;
     border-radius: var(--block-border-radius);
     padding: var(--block-padding);
+    background: var(--content-bg-color);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    position: relative;
-    transition: opacity 0.5s ease;
-    will-change: opacity, transform;
-    overflow: hidden;
-    
-    /* Gradient mask for fading edges */
-    -webkit-mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 5%,
-        black 95%,
-        transparent 100%
-    );
-    mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 5%,
-        black 95%,
-        transparent 100%
-    );
-}
-
-.block-title {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    font-weight: 300;
-    color: #111;
-}
-
-.block-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    font-weight: 300;
-    color: #555;
+    /* Ensure content fills block */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Direct text on background */
@@ -188,6 +178,24 @@ body {
     max-width: 800px;
     margin: 1rem auto;
     text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Carousel container */
+.carousel-container {
+    position: relative;
+    z-index: 2;
+    margin: 1rem 0;
+    flex: 1;
+    min-height: 300px; /* Ensure minimum height for carousel */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure images don't overflow their containers */
+.carousel-container img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 /* Responsive styles */
