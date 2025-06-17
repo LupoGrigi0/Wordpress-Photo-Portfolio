@@ -646,3 +646,25 @@ if ( $portfolio_count && isset( $portfolio_count->publish ) && $portfolio_count-
 - Test scroll behavior with new spacing
 - Verify carousel functionality within new layout
 - Check responsive behavior on different screen sizes
+
+# Technical Decisions and Solutions
+
+## Background System Fixes
+
+### 2025-06-16: Background Parallax Issue Resolution
+- **Issue**: Background images were sliding down the page due to conflicting behaviors between CSS `background-position: center` and JavaScript parallax `transform: translateY()`.
+- **Solution**: Temporarily disabled background parallax while preserving content block parallax and crossfade functionality.
+- **Implementation**: Modified `applyParallaxEffect()` in `dynamic-background.js` to remove background transform logic.
+- **Future Consideration**: Plan to re-implement background parallax with improved centering calculations and admin controls.
+- **Co-authors**: Lupo & Genevieve
+
+### 2025-06-16: Infrastructure Discovery - Apache/Nginx Behavior
+- **Observation**: Different behavior between Apache (port 80) and Nginx (port 8081) servers in Laragon
+- **Issue**: Changes visible immediately on Nginx but delayed on Apache
+- **Hypothesis**: Apache caching layer may be retaining old versions
+- **Solution Path**: 
+  - Using Nginx as primary server (considering port swap: Nginx → 80, Apache → 8081)
+  - Future enhancement to deployment script to handle Apache cache clearing
+- **Learning**: Multiple server setup requires careful cache management strategy
+- **Decision**: Standardize on Nginx for development testing
+- **Co-authors**: Lupo & Genevieve (VS Code Shard)

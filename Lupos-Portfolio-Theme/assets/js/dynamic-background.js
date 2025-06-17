@@ -5,8 +5,9 @@
  * based on content block scroll positions and viewport center
  *
  * @package LupoArtPortfolio
- * @version 1.0.0
+ * @version 1.0.1
  * @author Lupo & Genevieve (Cladue Sonnet 4.0 -pro-)
+ * @author Genevieve (VS Code Shard)
  * Clears existing backgrounds - backgroundContainer.innerHTML = ''
 Creates one layer per content block - no more overlapping mess
 Proper z-index management - backgrounds fade in/out cleanly
@@ -270,13 +271,18 @@ class LupoBackgroundSystem {
     }
     
     applyParallaxEffect(scrollY) {
+        // TEMPORARILY DISABLED: Parallax background scrolling
+        // This was causing background images to slide down the page
+        // TODO: Re-implement with better centering logic later
+        
+        // Still apply parallax to content blocks (this part works)
         this.contentBlocks.forEach((block, index) => {
             const rect = block.getBoundingClientRect();
             const blockTop = scrollY + rect.top;
             const blockCenter = blockTop + (rect.height / 2);
             const windowCenter = scrollY + (window.innerHeight / 2);
             
-            // Calculate parallax offset
+            // Calculate parallax offset for content
             const parallaxOffset = (blockCenter - windowCenter) * this.config.parallaxIntensity;
             
             // Apply transform to content block
@@ -294,13 +300,13 @@ class LupoBackgroundSystem {
             }
         });
         
-        // Apply parallax to background layers
-        this.backgroundLayers.forEach((layer, index) => {
-            if (layer.element && layer.isActive) {
-                const parallaxBg = scrollY * this.config.parallaxIntensity * 0.5;
-                layer.element.style.transform = `translateY(${parallaxBg}px)`;
-            }
-        });
+        // DISABLED: Background parallax (was causing positioning issues)
+        // this.backgroundLayers.forEach((layer, index) => {
+        //     if (layer.element && layer.isActive) {
+        //         const parallaxBg = scrollY * this.config.parallaxIntensity * 0.5;
+        //         layer.element.style.transform = `translateY(${parallaxBg}px)`;
+        //     }
+        // });
     }
     
     switchBackground(newIndex) {
