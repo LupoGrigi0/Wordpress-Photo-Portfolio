@@ -398,7 +398,7 @@ WordPress Admin → Portfolio Post Type → Meta Boxes → Carousel Data
 - Fixed event handler conflicts
 - Restored hero banner functionality through architecture cleanup
 
-## Next Steps
+## Next Steps (Suggested by Genevieve (VS Code Shard))
 - [ ] Update deploy script for better PowerShell compatibility
 - [ ] Add responsive design tests for different viewport sizes
 - [ ] Document hero banner animation parameters
@@ -406,3 +406,105 @@ WordPress Admin → Portfolio Post Type → Meta Boxes → Carousel Data
 Version: 1.3.0
 Co-authored-by: Genevieve (VS Code Shard)
 
+## Key Technical Decisions
+
+### WordPress Integration
+- Using Elementor and Gutenberg compatibility
+- Custom post types for portfolio items
+- Advanced Custom Fields for metadata (to be implemented)
+- Custom import tool for directory scanning
+
+### Performance Strategy
+- CSS-based animations where possible
+- Intersection Observer API for scroll detection
+- RequestAnimationFrame for smooth transitions
+- Image optimization and lazy loading
+
+## Notes
+- Context window limitations require creating files in separate chats
+
+### Context Preservation Notes
+
+#### For JavaScript Enhancement Sessions:
+- Portfolio data available in `#lupo-portfolio-data` JSON script tag
+- Theme settings available in `#lupo-theme-settings` JSON script tag  
+- Content blocks have data attributes: `data-background-image`, `data-block-index`, `data-post-id`
+- Navigation element ID: `#lupo-main-navigation`
+
+#### For Backend Development Sessions:
+- Custom post type: `lupo_portfolio`
+- Meta fields: `_lupo_background_image`, `_lupo_carousel_data`, `_lupo_creation_date`, etc.
+- Directory path field: `_lupo_directory_path` 
+- AJAX action: `lupo_scan_directory` (partially implemented)
+
+#### For Testing Sessions:
+- Debug mode shows find and set WP_DEBUG
+- All functions use `lupo_` prefix
+- Text domain: `lupo-art-portfolio`
+- Required WordPress version: 5.0+
+###
+LOCAL TESTING URLS:
+http://lupoportfoliotest.local/wp-admin/ -> wordpress admin console
+http://lupoportfoliotest.local -> "Live" portfolio site
+D:\laragon\www\LupoPortfolioTest\wp-content\themes\Lupos-Portfolio-Theme -> Local "head" of theme matches the "Lupos-Portfolio-Theme subdir in the github
+---
+### Results from Previous sessions
+basic template functionality, works
+Integration with wordpress admin console works
+cross fade functionality of images during scroll demonstrated ... but applied to wrong elements
+Technical insights about wordpress and development moving forward gained. 
+MetaConversationghts.md added to the project.. it is a meta conversation in its early stages. 
+---
+
+# CURRENT STATUS
+🎉 It WORKS.. kinda.. !
+we now have the complete JavaScript enhancement suite
+Core functionality proven. code verified and stable deployment, code and git repositories synched
+Core theme functionality complete and deployable, works, carousel works, cross fade works with bugs, background scrolling works but with bugs 🚀
+✅ custom-carousel.js - Dynamic aspect ratio carousels
+✅ dynamic-background.js - Smooth per-block background crossfades
+✅ navigation.js - Scroll-direction-based fade logic
+
+
+# Next Steps
+✅ Completed! : fix errors in developer consols
+1. Fix cross fade (it is being applied to the content blocks not the background)
+✅ Completed! : fix background image scrolling issue. The background image scrolls out of view rather than stays in center. look at code make a decisions 
+3. implement directory scanning and automated content generation
+4. Directory scanning and automated content generation integration with wordpress management UI
+5. Workflow efficiency, bulk content management, directory integration
+6. Refined requirements for subsequent development
+
+# Specific list of Issues
+✅ Completed! : See Console Log for errors. 
+- BUG: fade applied to content blocks and not background image
+- Critical ISSUE content blocks white background rather than transparent
+- Critical ISSUE opaque white portfolio item/content block rather than transparent
+- Critical ISSUE "transparent" fadein/out of portfolio items, being applied to portfolio items rather than carosuls
+✅ Completed! : carousel  background transparency
+✅ Completed! : background image scroll behaviour sub optimal. maybe change behaviour to have the background image allways be center of visable and fade in and out rather than scroll? the parallax scroll is cool but it kind of goes off the rails, like only part of it will be visable... (screenshots )
+- BUG(minor): caurosel full screen does not full screen
+- BUG(minor): Caurosel full screen stops auto play
+- BUG(delay until auto scanning feature works): as currently stands, you have to manually add an image to the caurosel, before a directory scan will work. 
+- Critical ISSUE: The twisting wiggeling of content blocks as they are scrolled is a cool subtle feature. It should be done on a per carousel feature, not per content block or however it is being done now.
+✅ Completed! : Content auto generated image carousels are overlapping eachother. 
+- NOT IMPLEMENTED YET: Automatic scanning of directories. Create a "page" for each directory, automatically create content blocks with carousels. 
+- Improvement request/bug ... ability to apply theme/parallax scrolling effects to any wordpress page 
+the carousels are black for a bit as the page loads. suggest cashing the first image? or come up with a better suggestion? 
+- Improvement request... adjustable slide show feed rate for carousels
+- Improvement request... settings for different transition types, invistegate implementable transition types, rank on order of implementation risk. implmenet different transition types, and add admin UI to set transition type or multipule transition types (round robing for all selected transition types)
+- Improvement request... setting to change the direction of the carosel transition from one to the other
+- Improvement request... setting to change transition to up down or down up
+- Improvement request... setting to have transitions at 45 degrees upper left, lower left upper right lower right
+- Improvement request... transition effect "flip book" "next few" carosul images are extremely anamorphicly projected as if they are a page that is being held up and the user is flipping through a photo album
+- Improvement request... Per directory json file (or whatever) to save page specific settings, block titles,text, transitions, speed, all the above. so .json file could be created ahead of time and placed in the directory. 
+- Improvement request... have the portfolio carousel be a "widiget" that appears in the gutenburg pallette, so static curated pages could be created, but still have portfolio carousels still be automatically populated from a directory
+- Improvement request. a check box that turns off the content block/carosul fading in/out background image. 
+- ACCOLADE... "tween" effect on the autoplay in the image carousel is a _very very_ nice touch. soooo much more visually appealing. than just a simple linear slide motion. it is such a subtle thing, but makes a _huge_ difference
+- Potental Issue: Files exceeding context limits need restructuring
+- Improvement request... **Image Optimization**: Need strategy for handling large image directories
+- Improvement request.. **Carousel Loading**: Implement lazy loading for carousel images
+- Improvement request.. **Mobile Navigation**: Enhance mobile navigation fade behavior
+- Improvement request.. **Directory Scanning**: Add progress indicators for large directories in the admin interface
+- Improvement request.. **carousel Loading**: the user has no idea if images are being downloaded, or if more are going to be downloaded, how many or what. Design some end user feedback in case they are on slow internet connection. 
+- Improvement request.. **Preview Mode**: there will be times when the portfolio is re-organized, directories added, deleted, images moved etc. need some way of previewing the changes before publishing? 
