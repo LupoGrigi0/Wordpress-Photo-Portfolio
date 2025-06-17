@@ -9,41 +9,80 @@
 
 class PortfolioSpacing {
     constructor() {
+        // Core properties
         this.portfolioItems = document.querySelectorAll('.content-block');
+        this.carousels = document.querySelectorAll('.advanced-carousel');
+        this.isInitialized = false;
+        
+        // Observer setup
         this.observer = new MutationObserver(this.handleMutations.bind(this));
         this.observerConfig = {
             childList: true,
             subtree: true,
             attributes: true,
-            attributeFilter: ['style', 'class']
+            attributeFilter: ['style', 'class', 'src']
         };
+        
+        // Debounce handlers
+        this.updateTimeout = null;
+        this.resizeTimeout = null;
+        this.isUpdating = false;
+        
+        // Wait for carousels to be ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.initialize());
+        } else {
+            this.initialize();
+        }
         
         // Initialize observation
         this.init();
     }
 
-    init() {
-        // Observe each portfolio item
+    initialize() {
+        if (this.isInitialized) return;
+        this.isInitialized = true;
+
+        // Ensure carousels are ready before calculating spacing
+        const checkCarousels = setInterval(() => {
+            const readyCarousels = Array.from(this.carousels)
+                .filter(carousel => carousel.offsetHeight > 0);
+
+            if (readyCarousels.length === this.carousels.length) {
+                clearInterval(checkCarousels);
+                this.init();
+            }
+        }, 100);
+
+        // Timeout after 5 seconds to prevent infinite waiting
+        setTimeout(() => {
+            clearInterval(checkCarousels);
+            if (!this.isInitialized) {
+                console.warn('Some carousels may not be fully initialized');
+                this.init();
+            }
+        }, 5000);
+    }    init() {
+        if (this.observersAttached) return; // Prevent recursive initialization
+        this.observersAttached = true;
+
+        // First, do the initial spacing calculation
+        this.updateSpacing();
+
+        // Then set up observers for future changes
         this.portfolioItems.forEach(item => {
             this.observer.observe(item, this.observerConfig);
         });
 
-        // Initial positioning
-        this.updateSpacing();
-
         // Handle window resize
         window.addEventListener('resize', () => {
-            requestAnimationFrame(this.updateSpacing.bind(this));
+            if (this.resizeTimeout) {
+                clearTimeout(this.resizeTimeout);
+            }
+            this.resizeTimeout = setTimeout(() => {
+                this.updateSpacing();
+            }, 100);
         });
-    }    constructor() {
-        this.portfolioItems = document.querySelectorAll('.content-block');
-        this.observer = new MutationObserver(this.handleMutations.bind(this));
-        this.observerConfig = {
-            childList: true,
-            subtree: true,
-            attributes: true,
-            attributeFilter: ['style', 'class']
-        };
         
         // Debounce handler
         this.updateTimeout = null;
@@ -87,21 +126,28 @@ class PortfolioSpacing {
         // Early exit if document is hidden (tab not active)
         if (document.hidden) return;
 
-        const viewportHeight = window.innerHeight;
+        // Get reference carousel height
+        const carousel = document.querySelector('.advanced-carousel');
+        if (!carousel) return;
+          const carouselHeight = Math.max(carousel.offsetHeight, 300); // Use actual height or min-height
+        const spacingHeight = Math.floor(carouselHeight * 0.5); // Half of carousel height
         
         this.portfolioItems.forEach((item, index) => {
-            // Use CSS variables for consistent spacing
-            item.style.setProperty('--item-spacing', `${Math.floor(viewportHeight * 0.3)}px`);
+            // Reset any existing styles
+            item.style.margin = '0';
             
-            // Add classes instead of direct styles
-            item.classList.add('portfolio-item-spaced');
-            
+            // Calculate margins based on position
             if (index === 0) {
-                item.classList.add('portfolio-item-first');
+                // First item: one-third carousel height from top
+                item.style.marginTop = `${spacingHeight}px`;
+            } else {
+                // Other items: one-third carousel height between them
+                item.style.marginTop = `${spacingHeight}px`;
             }
             
             if (index === this.portfolioItems.length - 1) {
-                item.classList.add('portfolio-item-last');
+                // Last item: one-third carousel height at bottom
+                item.style.marginBottom = `${spacingHeight}px`;
             }
         });
     }
