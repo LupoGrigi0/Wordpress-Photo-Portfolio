@@ -11,8 +11,14 @@
     --block-padding: 2rem;
     --block-border-radius: 0.5rem;
     --transition-speed: 0.5s;
-    --block-vertical-spacing: 100vh; /* Full viewport height between blocks */
+    
+    /* UPDATED: Flexible spacing variables */
     --block-min-height: 60vh;       /* Minimum height for content blocks */
+    --block-vertical-spacing: 50vh; /* Half viewport between blocks */
+    --carousel-gap: 2rem;           /* Space between carousels */
+    
+    /* DEBUG: Visual debugging helpers */
+    --debug-block-opacity: 0; /* Set to 0.1 to enable debug visualization */
 }
 
 * {
@@ -119,28 +125,37 @@ body {
 .content-block {
     max-width: 1200px;
     width: 90%;
-    margin: var(--block-vertical-spacing) auto; /* Full viewport height spacing */
-    min-height: var(--block-min-height);
+    margin-left: auto;
+    margin-right: auto;
     padding: var(--block-padding);
     position: relative;
     transition: transform 0.5s ease-out;
     will-change: transform;
-    /* Ensure blocks don't collapse */
-    clear: both;
+    
+    /* Enhanced layout control */
     display: flex;
     flex-direction: column;
+    justify-content: center; /* Center content vertically within block */
+    
+    /* DEBUG: More visible boundaries */
+    background: rgba(255, 0, 0, var(--debug-block-opacity));
+    border: 1px solid rgba(255, 0, 0, 0.2); /* Subtle border always visible */
+    
+    /* Ensure proper separation */
+    clear: both;
 }
 
 /* Prevent first block from having top margin */
 .content-block:first-child {
-    margin-top: calc(var(--block-vertical-spacing) * 0.5);
+    margin-top: 40vh; /* Increased from 30vh */
 }
 
 /* Add extra space after the last block for better scrolling */
 .content-block:last-child {
-    margin-bottom: calc(var(--block-vertical-spacing) * 0.5);
+    margin-bottom: 40vh; /* Increased from 30vh */
 }
 
+/* UPDATED: Block content with flexible height */
 .block-content {
     position: relative;
     z-index: 1;
@@ -148,10 +163,15 @@ body {
     padding: var(--block-padding);
     background: var(--content-bg-color);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    /* Ensure content fills block */
-    flex: 1;
+    
+    /* FIXED: Flexible content sizing */
+    flex: 0 0 auto; /* Don't grow to fill space - use natural content height */
+    width: 100%; /* Full width of parent */
+    
+    /* Internal spacing for content */
     display: flex;
     flex-direction: column;
+    gap: 1.5rem; /* Space between carousel containers */
 }
 
 /* Direct text on background */
@@ -184,11 +204,22 @@ body {
 .carousel-container {
     position: relative;
     z-index: 2;
-    margin: 1rem 0;
-    flex: 1;
-    min-height: 300px; /* Ensure minimum height for carousel */
+    margin: 1rem 0; /* Additional breathing room */
+    flex-shrink: 0; /* Prevent carousel compression */
+    min-height: 300px; /* Maintain minimum height */
     display: flex;
     flex-direction: column;
+}
+
+/* NEW: Carousel container spacing within portfolio items */
+.block-carousels {
+    display: flex;
+    flex-direction: column;
+    gap: var(--carousel-gap); /* Space between multiple carousels */
+}
+
+.carousel-spacer {
+    height: 1.5rem; /* Space between carousel chunks */
 }
 
 /* Ensure images don't overflow their containers */
@@ -196,6 +227,20 @@ body {
     max-width: 100%;
     height: auto;
     object-fit: contain;
+}
+
+/* Portfolio item spacing classes */
+.portfolio-item-spaced {
+    margin-top: var(--item-spacing, 30vh);
+    transition: margin 0.3s ease-out;
+}
+
+.portfolio-item-first {
+    margin-top: 20vh;
+}
+
+.portfolio-item-last {
+    margin-bottom: 20vh;
 }
 
 /* Responsive styles */

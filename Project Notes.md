@@ -622,49 +622,52 @@ if ( $portfolio_count && isset( $portfolio_count->publish ) && $portfolio_count-
 - Modified transition effects to target specific layers
 - Enhanced z-index hierarchy for proper content stacking
 
-## Content Block Spacing Fix (2025-06-15)
-### Issue
-- Content blocks were overlapping
-- No clear visual separation between portfolio items
-- Inconsistent block heights
+# Technical Implementation Notes
 
-### Solution
-1. Implemented full viewport height spacing between blocks
-2. Added minimum height requirements
-3. Used flexbox for better content organization
-4. Improved margin control for first/last blocks
-5. Implemented clear spacing rules to prevent overlap
+## Content Block Spacing Fix (2025-06-16)
 
-### Technical Implementation
-- Added new CSS custom properties for spacing
-- Used viewport-based units for consistent spacing
-- Implemented flexbox for better content organization
-- Added specific rules for carousel containers
-- Ensured proper z-index stacking
+### Key Changes
+1. Shifted from fixed 100vh spacing to dynamic 50vh gaps between blocks
+2. Implemented flexible content sizing using modern CSS techniques:
+   - Using `flex: 0 0 auto` for natural content height
+   - Maintaining visual separation with consistent margins
+   - Preserving the "floating" aesthetic while fixing layout
 
-### Next Steps
-- Test scroll behavior with new spacing
-- Verify carousel functionality within new layout
-- Check responsive behavior on different screen sizes
+### Technical Decisions
+- Chose 50vh spacing over 100vh to improve content density while maintaining visual separation
+- Added explicit gap properties for carousel spacing to prevent content overlap
+- Maintained z-index layering for background transitions
 
-# Technical Decisions and Solutions
+### Debug Visualization Features
+- Added visual debugging for content block spacing
+- Three activation methods:
+  1. CSS: Set `--debug-block-opacity: 0.1` for local development
+  2. WordPress Customizer: Toggle in "Debug Visualization" section
+  3. Automatic: Enables when WP_DEBUG is true
+- Shows red tinted backgrounds to easily identify spacing issues
+- Safe for production: defaults to disabled
 
-## Background System Fixes
+### Dynamic Spacing Implementation
+- **Problem**: Static spacing couldn't account for dynamic carousel content
+- **Solution**: Implemented MutationObserver-based dynamic spacing
+  - Watches for carousel content changes in real-time
+  - Calculates actual content heights after images load
+  - Uses requestAnimationFrame for smooth transitions
+  - Automatically adjusts all portfolio item positions
+  - Handles window resize events gracefully
 
-### 2025-06-16: Background Parallax Issue Resolution
-- **Issue**: Background images were sliding down the page due to conflicting behaviors between CSS `background-position: center` and JavaScript parallax `transform: translateY()`.
-- **Solution**: Temporarily disabled background parallax while preserving content block parallax and crossfade functionality.
-- **Implementation**: Modified `applyParallaxEffect()` in `dynamic-background.js` to remove background transform logic.
-- **Future Consideration**: Plan to re-implement background parallax with improved centering calculations and admin controls.
-- **Co-authors**: Lupo & Genevieve
+### Technical Architecture
+1. **MutationObserver** monitors DOM changes
+2. **requestAnimationFrame** ensures smooth animations
+3. **getBoundingClientRect()** provides accurate dimensions
+4. **transform: translateY()** for performant positioning
 
-### 2025-06-16: Infrastructure Discovery - Apache/Nginx Behavior
-- **Observation**: Different behavior between Apache (port 80) and Nginx (port 8081) servers in Laragon
-- **Issue**: Changes visible immediately on Nginx but delayed on Apache
-- **Hypothesis**: Apache caching layer may be retaining old versions
-- **Solution Path**: 
-  - Using Nginx as primary server (considering port swap: Nginx → 80, Apache → 8081)
-  - Future enhancement to deployment script to handle Apache cache clearing
-- **Learning**: Multiple server setup requires careful cache management strategy
-- **Decision**: Standardize on Nginx for development testing
-- **Co-authors**: Lupo & Genevieve (VS Code Shard)
+### Benefits
+- No more overlapping content
+- Smooth transitions during content changes
+- Responsive to window resizing
+- Maintains visual hierarchy while scrolling
+- Performance optimized using modern browser APIs
+
+Co-authored-by: Genevieve (VS Code Shard)
+Version: 1.2.0

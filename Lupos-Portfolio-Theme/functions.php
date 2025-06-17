@@ -49,6 +49,9 @@ function lupo_theme_setup() {
 
     // Set content width
     $GLOBALS['content_width'] = 1200;
+
+    // Include customizer settings
+    require_once LUPO_THEME_PATH . '/inc/customizer-debug.php';
 }
 add_action( 'after_setup_theme', 'lupo_theme_setup' );
 
@@ -84,6 +87,15 @@ function lupo_enqueue_assets() {
     if ( file_exists( LUPO_THEME_PATH . '/assets/js/custom-carousel.js' ) ) {
         wp_enqueue_script( 'lupo-carousel', LUPO_THEME_URL . '/assets/js/custom-carousel.js', array( 'jquery' ), LUPO_THEME_VERSION, true );
     }
+
+    // Dynamic spacing handler
+    wp_enqueue_script(
+        'lupo-dynamic-spacing',
+        LUPO_THEME_URL . '/assets/js/dynamic-spacing.js',
+        array('jquery'),
+        LUPO_THEME_VERSION,
+        true
+    );
 
     // Localize scripts for AJAX
     wp_localize_script( 'jquery', 'lupo_ajax', array(
