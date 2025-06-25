@@ -732,7 +732,7 @@ The cleanup of the event handling system resulted in the restoration of the hero
 Version: 1.3.0
 Co-authored-by: Genevieve (VS Code Shard)
 
-NOTE: debugging left side panel when opening http://lupoportfoliotest.local:8081/wp-admin/customize.php Note the "debug" 
-NOTE: Local nginx is on port 8081
-NOTE: http://lupoportfoliotest.local is the virtual host name created by laragon and the default landing page
-NOTE: http://lupoportfoliotest.local/wp-admin is the URL for the wordpress interface
+## NOTE: debugging left side panel when opening http://lupoportfoliotest.local:8081/wp-admin/customize.php Note the "debug" 
+## NOTE: Local nginx is on port 8081
+## NOTE: http://lupoportfoliotest.local is the virtual host name created by laragon and the default landing page
+## NOTE: http://lupoportfoliotest.local/wp-admin is the URL for the wordpress interface
